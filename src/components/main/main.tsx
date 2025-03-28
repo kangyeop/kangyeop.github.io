@@ -5,7 +5,7 @@ export const Main: FC = () => {
   return (
     <div className="main_section">
       <div className="img_container">
-        <img src="/src/assets/main-drawing.png"></img>
+        <img src="/src/assets/image/main-drawing.png"></img>
       </div>
       <div className="main_footer">
         <div className="text_container">

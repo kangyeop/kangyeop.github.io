@@ -5,7 +5,7 @@ import './gallery.scss';
 export const Gallery: FC = () => {
   return (
     <div className="gallery_container">
-      <img width={250} src="/src/assets/divider.png" />
+      <img width={250} src="/src/assets/image/divider.png" />
       <p className="title">Gallery</p>
     </div>
   );
