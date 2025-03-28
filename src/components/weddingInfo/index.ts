@@ -1,0 +1,1 @@
+export { WeddingInfo } from './weddingInfo';

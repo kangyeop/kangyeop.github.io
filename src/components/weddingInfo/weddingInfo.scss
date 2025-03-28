@@ -1,0 +1,20 @@
+.wedding_info_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .title {
+    font-size: 36px;
+    font-weight: 900;
+  }
+
+  .description {
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  img {
+    margin-top: 40px;
+  }
+}
