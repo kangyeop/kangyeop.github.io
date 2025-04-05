@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import second from "../../assets/image/second.jpg";
+---
+
+<div class="second_container">
+  <Image src={second} alt="second image" />
+</div>
+
+<style>
+  .second_container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+</style>

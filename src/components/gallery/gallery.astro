@@ -1,0 +1,137 @@
+---
+import { getImage, Image } from "astro:assets";
+import divider from "../../assets/image/divider.png";
+import { Swiper } from "swiper";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/image/gallery/*"
+);
+const imagePaths = Object.keys(images).filter((imagePath) => {
+  return imagePath.startsWith(`/src/assets/image/gallery/`);
+});
+---
+
+<div class="gallery_container">
+  <Image width={100} src={divider} alt="divider" />
+  <p class="title">Gallery</p>
+  <div class="gallery_grid">
+    {
+      imagePaths.map(async (imagePath, index) => {
+        let image = images[imagePath]();
+        let optimizedImage = await getImage({
+          src: image,
+        });
+
+        return (
+          <a
+            href={optimizedImage.src}
+            data-pswp-width={optimizedImage.attributes.width}
+            data-pswp-height={optimizedImage.attributes.height}
+            class="gallery_item"
+            target="_blank"
+          >
+            <Image src={image} alt="altText" />
+          </a>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: ".gallery_grid",
+    children: "a",
+    pswpModule: () => import("photoswipe"),
+  });
+
+  lightbox.init();
+</script>
+
+<style>
+  .gallery_container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .gallery_grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 8px;
+
+      .gallery_item {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          display: block;
+          aspect-ratio: 1 / 1;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .dimmed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 80%;
+      max-width: 400px;
+
+      border-radius: 10px;
+    }
+  }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: white;
+  }
+
+  .swiper-pagination-bullet {
+    background: white;
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import mainImage from "../../assets/image/main.jpg";
+---
+
+<div class="main_section">
+  <div class="img_container">
+    <Image src={mainImage} alt="Main Image" />
+  </div>
+  <div class="main_footer">
+    <div class="text_container">
+      <p class="title">이강엽 ♥ 이주영</p>
+      <p class="description">2025년 06월 15일 일요일 PM 12시 20분</p>
+      <p class="description">CN천년 웨딩홀 4층 라비엔홀</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .main_section {
+    padding-top: 40px;
+
+    .img_container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: relative;
+
+      img {
+        width: 100%;
+        height: auto;
+        /* object-fit: contain; */
+
+        border-radius: 10px;
+      }
+    }
+
+    .main_footer {
+      margin-top: 40px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+
+      .text_container {
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title {
+          font-size: 38px;
+          font-weight: 900;
+        }
+
+        .description {
+          font-size: 22px;
+          font-weight: 900;
+
+          text-align: center;
+        }
+      }
+    }
+  }
+</style>
