@@ -1,0 +1,82 @@
+---
+import { Image } from "astro:assets";
+import divider from "../../assets/image/divider.png";
+---
+
+<div class="map_container">
+  <Image width={100} src={divider} alt="divider" />
+  <p class="title">Location</p>
+  <!-- IMAGE -->
+  <div class="location_info">
+    <p>CN 천년 웨딩홀(계산점)</p>
+    <p>TEL. 032-546-5600</p>
+    <p>인천광역시 계양구 경명대로 1108</p>
+  </div>
+
+  <div class="section">
+    <p class="title">지하철 이용시</p>
+
+    <p class="description">인천지하철 : 계산역 1번 출구</p>
+  </div>
+
+  <div class="section">
+    <p class="title">버스 이용시</p>
+    <p class="description">간선 : 24 - 1 , 30 , 79 , 80</p>
+    <p class="description">마을 : 584 - 1 , 588</p>
+    <p class="description">좌석 : 1 1 1 , 1 1 1 B , 302</p>
+    <p class="description">시외 : 3000 , 3030 , 5000</p>
+  </div>
+
+  <div class="section">
+    <p class="title">주차안내</p>
+    <p class="description">2시간 무료주차</p>
+  </div>
+</div>
+
+<style>
+  .map_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 60px;
+
+    .title {
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .location_info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      width: 100%;
+
+      p {
+        font-size: 32px;
+        font-weight: 900;
+      }
+    }
+
+    .section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      margin-top: 40px;
+
+      .title {
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .description {
+        font-size: 20px;
+        font-weight: 900;
+      }
+    }
+  }
+</style>
