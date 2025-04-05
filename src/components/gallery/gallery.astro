@@ -1,7 +1,6 @@
 ---
 import { getImage, Image } from "astro:assets";
 import divider from "../../assets/image/divider.png";
-import { Swiper } from "swiper";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/image/gallery/*"
