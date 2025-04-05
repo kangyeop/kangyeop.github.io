@@ -1,0 +1,72 @@
+---
+import divider from "../../assets/image/divider.png";
+import introduction from "../../assets/image/introduction.jpg";
+import { Image } from "astro:assets";
+---
+
+<div class="introduction_container">
+  <Image width={100} src={divider} alt="divider" />
+  <Image src={introduction} alt="introduction" />
+  <div class="information_container">
+    <p>
+      이기흥 <span class="dot"></span> 최명숙<span class="small_size">
+        아들</span
+      >이강엽
+    </p>
+    <p>
+      이수윤 <span class="dot"></span> 육성환<span class="small_size">
+        딸</span
+      >이주영
+    </p>
+  </div>
+</div>
+
+<style>
+  .introduction_container {
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .information_container {
+      padding-top: 60px;
+      p {
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .dot {
+        position: relative;
+        width: 5px;
+        height: 24px;
+        overflow: hidden;
+
+        display: inline-block;
+        vertical-align: top;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 24px;
+        text-align: center;
+      }
+
+      .dot::after {
+        content: ".";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        display: block;
+        font-size: 24px;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .small_size {
+        font-size: 18px;
+        display: inline-block;
+        width: 40px;
+        text-align: center;
+      }
+    }
+  }
+</style>
