@@ -1,11 +1,21 @@
 ---
 import { Image } from "astro:assets";
 import divider from "../../assets/image/divider.png";
+import Button from "./button.astro";
 ---
 
 <div class="map_container">
   <Image width={100} src={divider} alt="divider" />
   <p class="title">Location</p>
+  <div class="button_group">
+    <Button
+      href="https://map.naver.com/v5/entry/place?lat={위도}&lng={경도}&placeName={장소명}"
+      >카카오 맵</Button
+    >
+    <Button>네이버 지도</Button>
+    <Button>티맵</Button>
+  </div>
+
   <!-- IMAGE -->
   <div class="location_info">
     <p>CN 천년 웨딩홀(계산점)</p>
@@ -14,21 +24,21 @@ import divider from "../../assets/image/divider.png";
   </div>
 
   <div class="section">
-    <p class="title">지하철 이용시</p>
+    <p class="title"><span class="icon">🚇</span> 지하철 이용시</p>
 
     <p class="description">인천지하철 : 계산역 1번 출구</p>
   </div>
 
   <div class="section">
-    <p class="title">버스 이용시</p>
-    <p class="description">간선 : 24 - 1 , 30 , 79 , 80</p>
-    <p class="description">마을 : 584 - 1 , 588</p>
-    <p class="description">좌석 : 1 1 1 , 1 1 1 B , 302</p>
-    <p class="description">시외 : 3000 , 3030 , 5000</p>
+    <p class="title"><span class="icon">🚌</span> 버스 이용시</p>
+    <p class="description">간선 : 24-1, 30, 79, 80</p>
+    <p class="description">마을 : 584-1, 588</p>
+    <p class="description">좌석 : 111, 111B, 302</p>
+    <p class="description">시외 : 3000, 3030, 5000</p>
   </div>
 
   <div class="section">
-    <p class="title">주차안내</p>
+    <p class="title"><span class="icon">🅿️</span> 주차안내</p>
     <p class="description">2시간 무료주차</p>
   </div>
 </div>
@@ -42,6 +52,13 @@ import divider from "../../assets/image/divider.png";
 
     margin-top: 60px;
 
+    .button_group {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
     .title {
       font-size: 36px;
       font-weight: 900;
@@ -50,12 +67,12 @@ import divider from "../../assets/image/divider.png";
     .location_info {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
 
       width: 100%;
 
       p {
-        font-size: 32px;
+        font-size: 22px;
         font-weight: 900;
       }
     }
@@ -69,13 +86,18 @@ import divider from "../../assets/image/divider.png";
       margin-top: 40px;
 
       .title {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 900;
+
+        .icon {
+          vertical-align: middle;
+        }
       }
 
       .description {
         font-size: 20px;
         font-weight: 900;
+        letter-spacing: 2px;
       }
     }
   }

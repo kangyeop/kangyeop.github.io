@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import divider from "../../assets/image/divider.png";
+import Accordion from "./accordion.astro";
 ---
 
 <div class="address_container">
@@ -8,10 +9,42 @@ import divider from "../../assets/image/divider.png";
   <p class="title">마음 전하실 곳</p>
 
   <div class="section">
-    <p class="title">신랑측 마음 전하실 곳</p>
+    <Accordion title="신랑측 마음 전하실 곳">
+      <div class="address_info">
+        <span class="name">이강엽</span>
+        <span class="address">110-438-166154</span>
+        <span class="bank_name">신한은행</span>
+      </div>
+      <div class="address_info">
+        <span class="name">이기흥</span>
+        <span class="address">477035-52-130869</span>
+        <span class="bank_name">농협은행</span>
+      </div>
+      <div class="address_info">
+        <span class="name">최명숙</span>
+        <span class="address">351-0803-7298-23</span>
+        <span class="bank_name">농협은행</span>
+      </div>
+    </Accordion>
   </div>
   <div class="section">
-    <p class="title">신부측 마음 전하실 곳</p>
+    <Accordion title="신부측 마음 전하실 곳">
+      <div class="address_info">
+        <span class="name">이주영</span>
+        <span class="address">00000000000000</span>
+        <span class="bank_name">신한은행</span>
+      </div>
+      <div class="address_info">
+        <span class="name">이수윤</span>
+        <span class="address">00000000000000</span>
+        <span class="bank_name">농협은행</span>
+      </div>
+      <div class="address_info">
+        <span class="name">육성환</span>
+        <span class="address">00000000000000</span>
+        <span class="bank_name">농협은행</span>
+      </div>
+    </Accordion>
   </div>
 </div>
 
@@ -37,15 +70,29 @@ import divider from "../../assets/image/divider.png";
 
       margin-top: 40px;
 
-      .title {
-        font-size: 28px;
-        font-weight: 900;
-      }
-
       .description {
         font-size: 20px;
         font-weight: 900;
       }
+
+      .address_info {
+        font-size: 20px;
+        letter-spacing: 2px;
+        margin-left: 2px;
+      }
     }
   }
 </style>
+
+<script>
+  const accordionHeaders = document.querySelectorAll(".accordion_header");
+
+  accordionHeaders.forEach((header) => {
+    header.addEventListener("click", (e) => {
+      header.classList.toggle("active");
+
+      const content = header.nextElementSibling;
+      content?.classList.toggle("active");
+    });
+  });
+</script>

@@ -1,0 +1,24 @@
+---
+const { href } = Astro.props;
+---
+
+<a class="map_button" href={href} target="_blank" rel="noopener noreferrer">
+  <slot />
+</a>
+
+<style>
+  .map_button {
+    background-color: #545148;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 5px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    width: 100px;
+
+    cursor: pointer;
+  }
+</style>
