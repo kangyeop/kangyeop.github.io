@@ -2,25 +2,28 @@
 import { Image } from "astro:assets";
 import divider from "../../assets/image/divider.png";
 import Button from "./button.astro";
+import CopyIcon from "../copyIcon.astro";
 ---
 
 <div class="map_container">
   <Image width={100} src={divider} alt="divider" />
   <p class="title">Location</p>
   <div class="button_group">
+    <Button href="https://place.map.kakao.com/1710434761">카카오 지도</Button>
     <Button
-      href="https://map.naver.com/v5/entry/place?lat={위도}&lng={경도}&placeName={장소명}"
-      >카카오 맵</Button
+      href="https://map.naver.com/v5/entry/place/12813804?c=15.00,0,0,3,dh&placePath=%3Fentry%253Dpll"
+      >네이버 지도</Button
     >
-    <Button>네이버 지도</Button>
-    <Button>티맵</Button>
+    <Button href="https://tmap.life/261a06ec">티맵</Button>
   </div>
 
-  <!-- IMAGE -->
   <div class="location_info">
     <p>CN 천년 웨딩홀(계산점)</p>
     <p>TEL. 032-546-5600</p>
-    <p>인천광역시 계양구 경명대로 1108</p>
+    <div class="location_address">
+      <p>인천광역시 계양구 경명대로 1108</p>
+      <CopyIcon content="인천광역시 계양구 경명대로 1108" />
+    </div>
   </div>
 
   <div class="section">
@@ -74,6 +77,16 @@ import Button from "./button.astro";
       p {
         font-size: 22px;
         font-weight: 900;
+      }
+
+      .location_address {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        svg {
+          margin-top: 4px;
+        }
       }
     }
 

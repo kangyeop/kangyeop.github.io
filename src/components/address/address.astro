@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import divider from "../../assets/image/divider.png";
 import Accordion from "./accordion.astro";
+import CopyIcon from "../copyIcon.astro";
 ---
 
 <div class="address_container">
@@ -14,16 +15,19 @@ import Accordion from "./accordion.astro";
         <span class="name">이강엽</span>
         <span class="address">110-438-166154</span>
         <span class="bank_name">신한은행</span>
+        <CopyIcon content="신한은행 110-438-166154" />
       </div>
       <div class="address_info">
         <span class="name">이기흥</span>
         <span class="address">477035-52-130869</span>
         <span class="bank_name">농협은행</span>
+        <CopyIcon content="농협은행 477035-52-130869" />
       </div>
       <div class="address_info">
         <span class="name">최명숙</span>
         <span class="address">351-0803-7298-23</span>
         <span class="bank_name">농협은행</span>
+        <CopyIcon content="농협은행 351-0803-7298-23" />
       </div>
     </Accordion>
   </div>
@@ -31,18 +35,21 @@ import Accordion from "./accordion.astro";
     <Accordion title="신부측 마음 전하실 곳">
       <div class="address_info">
         <span class="name">이주영</span>
-        <span class="address">00000000000000</span>
+        <span class="address">110-320-354385</span>
         <span class="bank_name">신한은행</span>
+        <CopyIcon content="신한은행 110-320-354385" />
       </div>
       <div class="address_info">
         <span class="name">이수윤</span>
-        <span class="address">00000000000000</span>
-        <span class="bank_name">농협은행</span>
+        <span class="address">1002-480-670108</span>
+        <span class="bank_name">우리은행</span>
+        <CopyIcon content="우리은행 1002-480-670108" />
       </div>
       <div class="address_info">
         <span class="name">육성환</span>
-        <span class="address">00000000000000</span>
-        <span class="bank_name">농협은행</span>
+        <span class="address">110-367-576918</span>
+        <span class="bank_name">신한은행</span>
+        <CopyIcon content="신한은행 110-367-576918" />
       </div>
     </Accordion>
   </div>
@@ -79,6 +86,14 @@ import Accordion from "./accordion.astro";
         font-size: 20px;
         letter-spacing: 2px;
         margin-left: 2px;
+
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        svg {
+          margin-top: 3px;
+        }
       }
     }
   }
