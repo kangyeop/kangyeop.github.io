@@ -1,0 +1,168 @@
+---
+// FallingHearts.astro
+// 화살표 함수와 forEach를 사용한 현대적 문법의 하트 애니메이션 컴포넌트
+---
+
+<div class="falling-hearts-container" id="heartContainer"></div>
+
+<style>
+  .falling-hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 100;
+    pointer-events: none;
+    .heart {
+      position: absolute;
+      top: -10px;
+      will-change: transform;
+      opacity: 0.6; /* 모든 하트에 동일한 투명도 적용 */
+    }
+  }
+</style>
+
+<script>
+  // 상수 정의
+  const FIXED_HEART_COUNT = 8;
+  const HEART_COLOR = "#ff4d6b";
+  const HEART_SIZE = 24; // 모든 하트의 크기를 통일(px)
+
+  // DOM 요소
+  const container = document.getElementById("heartContainer");
+
+  // 하트 객체 배열
+  const hearts: any[] = [];
+
+  // 컨테이너 높이 가져오기
+  const getContainerHeight = () => {
+    return Math.max(
+      document.querySelector(".falling-hearts-container")?.clientHeight || 0,
+      window.innerHeight
+    );
+  };
+
+  // SVG 하트 생성 함수
+  const createHeartSvg = () => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", String(HEART_SIZE));
+    svg.setAttribute("height", String(HEART_SIZE));
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", HEART_COLOR);
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute(
+      "d",
+      "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+    );
+
+    svg.appendChild(path);
+    return svg;
+  };
+
+  // 하트 생성 함수 - 항상 상단에서 시작
+  const createHeart = () => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+
+    // SVG 하트 생성 및 추가 (통일된 크기와 색상)
+    const svg = createHeartSvg();
+    heart.appendChild(svg);
+
+    // 랜덤 가로 위치 설정
+    const left = Math.random() * 100;
+    heart.style.left = `${left}%`;
+
+    const top = Math.random() * 100;
+    heart.style.top = `${top}vh`;
+
+    // DOM에 추가
+    container?.appendChild(heart);
+
+    // 떨어지는 속도 설정 (10~15초) - 느린 속도
+    const duration = 120000; // 밀리초로 변환
+
+    // 하트 정보 객체
+    return {
+      element: heart,
+      duration,
+      startTime: Date.now(),
+      left,
+      initialRotation: Math.random() * 180, // -20도~20도
+      rotationDirection: Math.random() > 0.5 ? 1 : -1, // 회전 방향
+    };
+  };
+
+  // 하트 초기화 및 재생성 - 항상 상단에서 새로 시작
+  const resetHeart = (heartInfo: any) => {
+    // 기존 요소 삭제
+    if (heartInfo.element && heartInfo.element.parentNode) {
+      heartInfo.element.parentNode.removeChild(heartInfo.element);
+    }
+
+    // 새 하트 생성하여 정보 업데이트
+    const newHeart = createHeart();
+
+    // 기존 객체 정보 업데이트
+    Object.assign(heartInfo, newHeart);
+  };
+
+  // 이징 함수 - 부드러운 움직임을 위해
+  const easeInOutSine = (x: any) => {
+    return -(Math.cos(Math.PI * x) - 1) / 2;
+  };
+
+  // 하트 애니메이션 업데이트 함수
+  const updateHearts = () => {
+    const containerHeight = getContainerHeight();
+
+    const currentTime = Date.now();
+
+    // 각 하트 위치 업데이트
+    hearts.forEach((heartInfo) => {
+      const elapsedTime = currentTime - heartInfo.startTime;
+      const progress = Math.min(elapsedTime / heartInfo.duration, 1);
+
+      // 진행도에 따라 위치 계산 (부드러운 흐름을 위해 이징 함수 사용)
+      const easedProgress = easeInOutSine(progress);
+      const translateY = easedProgress * (containerHeight + 50);
+
+      // 떨어지면서 약간 흔들리는 효과 (사인파)
+      const swayAmount = 15; // 흔들림 정도
+      const swayFrequency = 2; // 흔들림 빈도
+      const horizontalOffset =
+        Math.sin(progress * Math.PI * swayFrequency) * swayAmount;
+
+      // 약간의 회전 추가
+      const rotation =
+        heartInfo.initialRotation +
+        Math.sin(progress * Math.PI) * 50 * heartInfo.rotationDirection;
+
+      // transform 적용
+      heartInfo.element.style.transform = `translateY(${translateY}px) translateX(${horizontalOffset}px) rotate(${rotation}deg)`;
+
+      // 화면 밖으로 나간 하트 재생성
+      if (progress >= 1) {
+        resetHeart(heartInfo);
+      }
+    });
+
+    requestAnimationFrame(updateHearts);
+  };
+
+  // 초기 하트 생성 및 배치 - 초기 하트도 시간차를 두고 상단에서 생성
+  const initializeHearts = () => {
+    Array.from({ length: FIXED_HEART_COUNT }).forEach((_, i) => {
+      const heartInfo = createHeart();
+      hearts.push(heartInfo);
+    });
+
+    // 애니메이션 시작
+    updateHearts();
+  };
+
+  // 페이지 로드 시 하트 초기화
+  document.addEventListener("DOMContentLoaded", initializeHearts);
+</script>
