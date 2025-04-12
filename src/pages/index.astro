@@ -48,6 +48,42 @@ import Background from "../components/background/background.astro";
       max-width: 480px;
 
       padding: 0 20px 30px;
+
+      .fade_in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+
+      .fade_in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 </style>
+
+<script>
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(handleIntersection, {
+    threshold: 0.4,
+    rootMargin: "50px",
+  });
+
+  const contentElement = document.querySelector(".content");
+  if (contentElement) {
+    Array.from(contentElement.children).forEach((element) => {
+      element.classList.add("fade_in");
+      observer.observe(element);
+    });
+  }
+</script>
