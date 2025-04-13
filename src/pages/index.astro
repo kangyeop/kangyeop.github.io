@@ -10,7 +10,7 @@ import "./index.css";
 import Address from "../components/address/address.astro";
 import Introduction from "../components/introduction/introduction.astro";
 import BackgroundAnimation from "../components/backgroundAnimation/backgroundAnimation.astro";
-// import BackgroundAudio from "../components/backgroundAudio/backgroundAudio.astro";
+import BackgroundAudio from "../components/backgroundAudio/backgroundAudio.astro";
 ---
 
 <Layout>
@@ -24,6 +24,7 @@ import BackgroundAnimation from "../components/backgroundAnimation/backgroundAni
       <Gallery />
       <Map />
       <Address />
+      <BackgroundAudio />
     </div>
   </div>
 </Layout>
@@ -42,6 +43,33 @@ import BackgroundAnimation from "../components/backgroundAnimation/backgroundAni
     color: #000;
     width: 100%;
     min-height: 100vh;
+
+    .audio-player {
+      position: fixed;
+      top: 10;
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        .music_info {
+          margin-right: 5px;
+
+          font-size: 12px;
+          font-weight: 900;
+        }
+
+        button {
+          background-color: #545148;
+          color: #fff;
+          border-radius: 5px;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
+    }
 
     .content {
       margin: 0 auto;
