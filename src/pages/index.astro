@@ -45,10 +45,16 @@ import BackgroundAudio from "../components/backgroundAudio/backgroundAudio.astro
     min-height: 100vh;
 
     .audio-player {
+      width: 100%;
       position: fixed;
-      top: 10;
+      top: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      background-color: #fff;
 
       .controls {
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -67,6 +73,8 @@ import BackgroundAudio from "../components/backgroundAudio/backgroundAudio.astro
           border-radius: 5px;
           padding-left: 10px;
           padding-right: 10px;
+
+          cursor: pointer;
         }
       }
     }
