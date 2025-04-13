@@ -10,17 +10,16 @@ interface Props {
 // 기본값 적용
 const { heartCount = 8, heartColor = "#ff4d6b", heartSize = 24 } = Astro.props;
 
-// 고정된 값으로 덮어쓰기 (요구사항대로)
-const FIXED_HEART_COUNT = 8;
+const FIXED_HEART_COUNT = 10;
 const HEART_COLOR = "#ff4d6b";
 const HEART_SIZE = 24; // 모든 하트의 크기를 통일(px)
 
 // 하트 위치 및 애니메이션 속성을 미리 생성
-const hearts = Array.from({ length: FIXED_HEART_COUNT }).map(() => {
+const hearts = Array.from({ length: FIXED_HEART_COUNT }).map((_, index) => {
   return {
     // 화면 전체에 골고루 배치
-    startX: 15 + Math.random() * 70, // 가로 위치 (%)
-    startY: 15 + Math.random() * 70, // 세로 위치 (%)
+    startX: Math.random() * 100, // 가로 위치 (%)
+    startY: Math.random() * 100, // 세로 위치 (%)
     delay: Math.random() * 2, // 최소한의 지연만 적용 (초)
     duration: 6 + Math.random() * 6, // 더 빠른 애니메이션 (6-12초)
     floatDirection: Math.random() > 0.5 ? "direction1" : "direction2", // 떠다니는 방향
@@ -71,7 +70,7 @@ const hearts = Array.from({ length: FIXED_HEART_COUNT }).map(() => {
       position: absolute;
       width: var(--heart-size, 24px);
       height: var(--heart-size, 24px);
-      opacity: 0.8; /* 처음부터 보이도록 설정 */
+      opacity: 0.2; /* 처음부터 보이도록 설정 */
     }
   }
 
